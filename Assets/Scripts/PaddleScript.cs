@@ -7,32 +7,17 @@ public class PaddleScript : MonoBehaviour
 
     Rigidbody2D rb;
     Vector3 pos;
-    public float speed = 0.5f;
-    public float rigthBound = 2.5f;
+    public float speed = 0.8f;
     public float leftBound = -2.5f;
+    public float paddleSpeed = 0.8f;
+    private float yPosition = -1.58f;
+    private Vector3 playerPos = new Vector3(0, -1.58f, 0);
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        pos = rb.transform.position;
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        // Move the paddle
-        pos.x = Input.GetAxis("Horizontal") * speed;
-        transform.position = pos;
+        float xPos = transform.position.x + (Input.GetAxis("Horizontal") * paddleSpeed);
+        playerPos = new Vector3(Mathf.Clamp(xPos, -speed, speed), yPosition, 0f);
+        transform.position = playerPos;
 
-        // add boundaries to paddle
-        if(transform.position.x > rigthBound)
-        {
-            transform.position = new Vector3(rigthBound, transform.position.y, 0);
-        } else if (transform.position.x < leftBound)
-        {
-            transform.position = new Vector3(leftBound, transform.position.y, 0);
-        }
     }
 }
