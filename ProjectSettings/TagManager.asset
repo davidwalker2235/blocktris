@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Ball
   - RedBlock
+  - Block
+  - BlueBlock
+  - GreenBlock
+  - YellowBlock
   layers:
   - Default
   - TransparentFX
