@@ -12,13 +12,11 @@ public class BallScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(velocity, velocity);
-
+        Init();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Init()
     {
-        
+        rb.velocity = new Vector2(velocity, velocity);
     }
 }
