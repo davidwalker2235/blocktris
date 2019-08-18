@@ -6,6 +6,8 @@ public class PaddleScript : MonoBehaviour
 {
     Rigidbody2D rb;
     public float speed = 8f;
+    private Vector3 screenPoint;
+    private Vector3 offset;
 
     private void Start()
     {
@@ -14,6 +16,22 @@ public class PaddleScript : MonoBehaviour
 
     void Update()
     {
-        rb.velocity = new Vector3(Input.GetAxis("Horizontal")*speed, 0);
+    }
+
+    void OnMouseDown()
+    {
+        screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, gameObject.transform.position.y, screenPoint.z));
+    }
+
+    void OnMouseDrag()
+    {
+        Vector3 cursorPoint = new Vector3(Input.mousePosition.x, gameObject.transform.position.y, screenPoint.z);
+        Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(cursorPoint) + offset;
+
+        if (cursorPosition.x >= -0.817f && cursorPosition.x <= 0.816f)
+        {
+            rb.position = cursorPosition;
+        }
     }
 }
